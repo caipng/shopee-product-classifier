@@ -70,6 +70,28 @@ def check_files():
 def process():
     print('processing data')
 
+    def resize(im):
+        height, width, _ = im.shape
+
+        if height == width:
+            return cv2.resize(im, INPUT_SIZE)
+
+        if width < height:
+            new_width = INPUT_SIZE[0]
+            new_height = ceil(INPUT_SIZE[1] * (height/width))
+        else:
+            new_width = ceil(INPUT_SIZE[0] * (width/height))
+            new_height = INPUT_SIZE[1]
+
+        im = cv2.resize(im, (new_width, new_height))
+
+        if new_width > new_height:
+            x = ceil((new_width-INPUT_SIZE[0])/2)-1
+            return im[:, x:x+INPUT_SIZE[0], :]
+        elif new_height > new_width:
+            y = ceil((new_height-INPUT_SIZE[1])/2)-1
+            return im[y:y+INPUT_SIZE[1], :, :]
+
     # load in predictions of an intermediate model
     loaded = np.load(join('predictions', 'predictions.npz'))
     preds, files, labels = loaded['preds'], loaded['files'], loaded['y']
@@ -78,6 +100,7 @@ def process():
 
     num_processed, num_ignored = 0, 0
     for root, _, files in os.walk(join(ORIGINAL_DATA_DIR, "train", "train")):
+        break
         if len(files) == 0:
             continue
 
@@ -91,7 +114,7 @@ def process():
 
             num_processed += 1
             if num_processed % 10000 == 0:
-                print('processed {0} images'.format(num_processed))
+                print('processed {0} train images'.format(num_processed))
 
             # we chose to ignore images where P_predicted < 0.1
             # 0.1 is an arbiturary threshold
@@ -101,28 +124,24 @@ def process():
                 continue
 
             im = cv2.imread(join(root, file_path), cv2.IMREAD_COLOR)
-            height, width, _ = im.shape
-
-            if height == width:
-                im = cv2.resize(im, INPUT_SIZE)
-            else:
-                if width < height:
-                    new_width = INPUT_SIZE[0]
-                    new_height = ceil(INPUT_SIZE[1] * (height/width))
-                else:
-                    new_width = ceil(INPUT_SIZE[0] * (width/height))
-                    new_height = INPUT_SIZE[1]
-
-                im = cv2.resize(im, (new_width, new_height))
-
-                if new_width > new_height:
-                    x = ceil((new_width-INPUT_SIZE[0])/2)-1
-                    im = im[:, x:x+INPUT_SIZE[0], :]
-                elif new_height > new_width:
-                    y = ceil((new_height-INPUT_SIZE[1])/2)-1
-                    im = im[y:y+INPUT_SIZE[1], :, :]
-
+            im = resize(im)
             cv2.imwrite(join(destination_dir, file_path), im)
 
-    print('processed {} images total, ignored {} images'.format(
+    print('processed {} train images total, ignored {} images'.format(
         num_processed, num_ignored))
+
+    root = join(ORIGINAL_DATA_DIR, "test", "test")
+    num_processed = 0
+    destination_dir = join(DATA_DIR, "test")
+    os.makedirs(destination_dir, exist_ok=True)
+    for file_path in os.listdir(root):
+        if not file_path.endswith("jpg"):
+            continue
+
+        num_processed += 1
+        if num_processed % 1000 == 0:
+            print('processed {0} test images'.format(num_processed))
+
+        im = cv2.imread(join(root, file_path), cv2.IMREAD_COLOR)
+        im = resize(im)
+        cv2.imwrite(join(destination_dir, file_path), im)
