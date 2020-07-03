@@ -31,7 +31,7 @@ model.compile(
     loss='sparse_categorical_crossentropy',
     metrics=['acc'])
 
-n_epochs = 80
+n_epochs = 75
 n_cycles = 5
 lrate_max = 0.01
 checkpoint_filepath = os.path.join('models', 'model1.h5')
@@ -39,7 +39,7 @@ generator, _ = get_generators()
 
 model.fit(
     generator,
-    steps_per_epoch=1,
+    steps_per_epoch=50,
     class_weight=CLASS_WEIGHTS,
     epochs=n_epochs,
     verbose=1,
