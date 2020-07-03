@@ -1,7 +1,7 @@
 from tensorflow.keras.models import load_model
 from tensorflow.keras.optimizers import SGD
 from tensorflow.keras.callbacks import ModelCheckpoint
-from processing.augmentation import get_generators
+from processors.augmentation import get_generators
 from modules.lr import CosineAnnealingLRSchedule
 from constants import *
 
