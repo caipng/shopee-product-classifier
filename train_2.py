@@ -5,7 +5,7 @@ from processors.augmentation import get_generators
 from modules.lr import CosineAnnealingLRSchedule
 from constants import *
 
-model = load_model(os.path.join('models', 'model1.h5'))
+model = load_model(os.path.join('models', 'model2.h5'))
 
 # freeze first 3 convulation blocks
 for layer in model.layers[:81]:
