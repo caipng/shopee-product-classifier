@@ -32,7 +32,7 @@ def download():
 
         for key, value in response.cookies.items():
             if key.startswith('download_warning'):
-                params = {'id': id, 'confirm': value}
+                params = {'id': file_id, 'confirm': value}
                 response = session.get(URL, params=params, stream=True)
                 break
 
