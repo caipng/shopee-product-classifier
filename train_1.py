@@ -39,7 +39,7 @@ generator, _ = get_generators()
 
 model.fit(
     generator,
-    steps_per_epoch=38,
+    steps_per_epoch=1,
     class_weight=CLASS_WEIGHTS,
     epochs=n_epochs,
     verbose=1,

@@ -100,7 +100,6 @@ def process():
 
     num_processed, num_ignored = 0, 0
     for root, _, files in os.walk(join(ORIGINAL_DATA_DIR, "train", "train")):
-        break
         if len(files) == 0:
             continue
 
