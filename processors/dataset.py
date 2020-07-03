@@ -51,7 +51,7 @@ def download():
 
     print('extracting ' + dataset_filepath)
     with zipfile.ZipFile(dataset_filepath, 'r') as z:
-        z.extractall(dataset_filepath)
+        z.extractall(ORIGINAL_DATA_DIR)
 
     print('deleting zipfile')
     os.remove(dataset_filepath)

@@ -11,7 +11,7 @@ def main():
     try:
         dataset.check_files()
     except AssertionError:
-        print('wrong number of files, please delete the folder and run get_data.py again')
+        print('wrong number of files, please delete the folder and run main.py again')
         return
 
     if not os.path.isdir(DATA_DIR):

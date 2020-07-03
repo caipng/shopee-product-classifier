@@ -11,8 +11,8 @@ DATA_DIR = join(os.getcwd(), 'data', 'processed')
 ORIGINAL_DATA_DIR = join(os.getcwd(), 'data', 'original')
 FINAL_MODELS_DIR = join(os.getcwd(), 'models', 'final')
 
-# class weights calculated by proportion of
-# training data avaliable for each category - see `class_weight.ipynb`
+# class weights are calculated by relative proportions of
+# training data avaliable for each category - see `processors/class_weights.ipynb`
 CLASS_WEIGHTS = {0: 0.9353247075945548,
                  1: 0.9284040660289273,
                  2: 0.9339323373562302,
