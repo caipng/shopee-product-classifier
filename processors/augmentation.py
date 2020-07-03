@@ -78,6 +78,9 @@ def get_generators(model='resnet50'):
         # seed=42,
         batch_size=BATCH_SIZE)
 
+    # no more validation data for final stage
+    return (train_generator, None)
+
     test_generator = ImageDataGenerator(
         preprocessing_function=preprocess_input
     ).flow_from_directory(
