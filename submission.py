@@ -21,7 +21,7 @@ xgb_model = pickle.load(open(xgb_model_path, "rb"))
 gen = ImageDataGenerator(
     preprocessing_function=preprocess_input
 ).flow_from_directory(
-    os.path.join(ORIGINAL_DATA_DIR, 'test'),
+    os.path.join(DATA_DIR, 'test'),
     target_size=INPUT_SIZE,
     class_mode=None,
     batch_size=BATCH_SIZE,
