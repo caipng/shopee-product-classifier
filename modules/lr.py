@@ -5,12 +5,13 @@ from keras import backend
 
 
 class CosineAnnealingLRSchedule(Callback):
-    def __init__(self, n_epochs, n_cycles, lrate_max, verbose=0, save_prefix=""):
+    def __init__(self, n_epochs, n_cycles, lrate_max, verbose=0, save_prefix="", metric='acc'):
         self.epochs = n_epochs
         self.cycles = n_cycles
         self.lr_max = lrate_max
         self.lrates = list()
         self.save_prefix = save_prefix
+        self.metric = metric
 
     def cosine_annealing(self, epoch, n_epochs, n_cycles, lrate_max):
         epochs_per_cycle = floor(n_epochs/n_cycles)
@@ -27,8 +28,8 @@ class CosineAnnealingLRSchedule(Callback):
     def on_epoch_end(self, epoch, logs={}):
         epochs_per_cycle = floor(self.epochs / self.cycles)
         if epoch != 0 and (epoch + 1) % epochs_per_cycle == 0:
-            filename = "snapshot_model_%d_vacc_%s.h5" % (int(
-                (epoch + 1) / epochs_per_cycle), str(logs['val_acc']))
+            filename = "snapshot_model_%d(%s).h5" % (int(
+                (epoch + 1) / epochs_per_cycle), str(logs[self.metric]))
             if self.save_prefix != "":
                 filename = "{}_{}".format(self.save_prefix, filename)
             os.makedirs(os.path.join(os.getcwd(), 'models'), exist_ok=True)
