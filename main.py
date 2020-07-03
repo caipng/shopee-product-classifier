@@ -17,6 +17,9 @@ def main():
     if not os.path.isdir(DATA_DIR):
         dataset.process()
 
+    os.makedirs(MODELS_DIR, exist_ok=True)
+    os.makedirs(FINAL_MODELS_DIR, exist_ok=True)
+
 
 if __name__ == '__main__':
     main()

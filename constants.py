@@ -9,6 +9,7 @@ EPOCHS = 10
 # working directories
 DATA_DIR = join(os.getcwd(), 'data', 'processed')
 ORIGINAL_DATA_DIR = join(os.getcwd(), 'data', 'original')
+MODELS_DIR = join(os.getcwd(), 'models')
 FINAL_MODELS_DIR = join(os.getcwd(), 'models', 'final')
 
 # class weights are calculated by relative proportions of
