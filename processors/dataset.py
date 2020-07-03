@@ -43,6 +43,7 @@ def download():
 
         print('download finished')
         download_success = True
+        break
 
     if not download_success:
         print('download failed!')

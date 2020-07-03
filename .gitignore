@@ -133,3 +133,5 @@ data/
 *models/
 .vscode/
 .DS_Store
+*.h5
+tmp*
