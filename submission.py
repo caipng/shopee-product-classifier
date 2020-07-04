@@ -14,6 +14,7 @@ from constants import *
 models = []
 for model_file in os.listdir(FINAL_MODELS_DIR):
     models.append(load_model(os.path.join(FINAL_MODELS_DIR, model_file)))
+    print('loaded model {}'.format(model_file))
 
 xgb_model_path = os.path.join('ensemble', "model.pickle.dat")
 xgb_model = pickle.load(open(xgb_model_path, "rb"))
@@ -28,12 +29,12 @@ gen = ImageDataGenerator(
     shuffle=False
 )
 
-num_classified = 0
 with open('submission.csv', mode='w') as csv_file:
     writer = csv.writer(csv_file, delimiter=',', quotechar='"',
                         quoting=csv.QUOTE_MINIMAL)
     writer.writerow(['filename', 'category'])
 
+    num_classified = 0
     for test_images in gen:
         i = (gen.batch_index-1)*gen.batch_size
         batch_files = gen.filenames[i:i+gen.batch_size]
