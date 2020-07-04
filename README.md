@@ -16,13 +16,13 @@ This repo is the final stage where training and validation data is combined to t
 
 4.  Select the appropriate models in the `model/` directory to be used for the ensemble, and move them to `model/final`
 
-5.  `train_ensemble.ipynb` can trains the `XGBClassifier` to be used for final prediction
+5.  `train_ensemble.ipynb` trains the `XGBClassifier` to be used for final prediction
 
 6.  `submission.py` generates `submission.csv` (\*\*`submission.py` is bugged; interrupt the script once batch number reaches 0 ; `submission_fix.ipynb` generates the final file ready for upload to Kaggle)
 
 ### Results
 
-Public Leaderboard - $229^{th}$ with accuracy of $0.73977$ (as at 1800 4 Jul)
+Public Leaderboard - 229 of 770 with 0.73977 accuracy (as at 1800 4 Jul)
 
 _first try at image classifications/CNNs so its ok i guess_ 🤷
 
