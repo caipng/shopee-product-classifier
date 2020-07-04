@@ -20,10 +20,10 @@ model.compile(
 
 print(model.summary())
 
-n_epochs = 42
-n_cycles = 3
-lrate_max = 0.001
-checkpoint_filepath = os.path.join('models', 'model2.h5')
+n_epochs = 24
+n_cycles = 2
+lrate_max = 0.01
+checkpoint_filepath = os.path.join('models', 'model3.h5')
 generator, _ = get_generators()
 
 model.fit(
@@ -35,7 +35,7 @@ model.fit(
     callbacks=[
         CosineAnnealingLRSchedule(
             n_epochs, n_cycles, lrate_max,
-            verbose=1, save_prefix='model2'),
+            verbose=1, save_prefix='model3'),
         ModelCheckpoint(
             checkpoint_filepath, monitor='loss',
             verbose=1, save_best_only=True, mode='min')
