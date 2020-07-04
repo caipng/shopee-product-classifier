@@ -18,7 +18,9 @@ This repo is the final stage where training and validation data is combined to t
 
 5.  `train_ensemble.ipynb` trains the `XGBClassifier` to be used for final prediction
 
-6.  `submission.py` generates `submission.csv` (\*\*`submission.py` is bugged; interrupt the script once batch number reaches 0 ; `submission_fix.ipynb` generates the final file ready for upload to Kaggle)
+6.  `submission.py` generates `submission.csv` (\*\*`submission.py` is bugged; interrupt the script once batch number reaches 0; `submission_fix.ipynb` generates the final file ready for upload to Kaggle)
+
+\*\* _there are definitely bugs/stuff not working_
 
 ### Results
 
