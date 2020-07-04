@@ -131,7 +131,7 @@ def process():
 
     root = join(ORIGINAL_DATA_DIR, "test", "test")
     num_processed = 0
-    destination_dir = join(DATA_DIR, "test")
+    destination_dir = join(DATA_DIR, "test", "test")
     os.makedirs(destination_dir, exist_ok=True)
     for file_path in os.listdir(root):
         if not file_path.endswith("jpg"):
