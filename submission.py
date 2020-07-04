@@ -51,7 +51,7 @@ with open('submission.csv', mode='w') as csv_file:
 
         for i, f in enumerate(batch_files):
             num_classified += 1
-            if num_classified % 1000:
+            if num_classified % 1000 == 0:
                 print('classified {}'.format(num_classified))
 
             fid = f.split('/')[1]
