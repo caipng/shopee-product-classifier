@@ -33,8 +33,13 @@ with open('submission.csv', mode='w') as csv_file:
                         quoting=csv.QUOTE_MINIMAL)
     writer.writerow(['filename', 'category'])
 
-    num_classified = 0
+    flag = False
     for test_images in gen:
+        if gen.batch_index == 0:
+            if flag:
+                break
+            flag = True
+
         i = (gen.batch_index-1)*gen.batch_size
         batch_files = gen.filenames[i:i+gen.batch_size]
 
@@ -50,10 +55,6 @@ with open('submission.csv', mode='w') as csv_file:
         final_preds = xgb_model.predict(x)
 
         for i, f in enumerate(batch_files):
-            num_classified += 1
-            if num_classified % 1000 == 0:
-                print('classified {}'.format(num_classified))
-
             fid = f.split('/')[1]
 
             if len(fid) != 36:
@@ -63,3 +64,6 @@ with open('submission.csv', mode='w') as csv_file:
             y = int(final_preds[i])
             y = str(y) if y > 9 else '0' + str(y)
             writer.writerow([fid, y])
+
+        csv_file.flush()
+        print('done with batch ' + str(gen.batch_index))
