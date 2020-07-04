@@ -135,3 +135,4 @@ data/
 .DS_Store
 *.h5
 tmp*
+submission.csv

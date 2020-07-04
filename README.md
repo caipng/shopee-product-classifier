@@ -27,3 +27,5 @@ Public Leaderboard - 229 of 770 with 0.73977 accuracy (as at 1800 4 Jul)
 _first try at image classifications/CNNs so its ok i guess_ 🤷
 
 _this is a basic model with transfer learning, data augmentation, cyclic learning rates and snapshot ensembling; tried things like activity regularizers and BlurPooling but didnt seem to improve validation accuracy; there are definitely a plethora of ideas that were left untested due to time and computing power constraints_
+
+_98% of the computing was done on **Paperspace**'s free P-5000 instance_
